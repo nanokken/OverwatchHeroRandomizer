@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Tank from "./pages/Tank";
 import Dps from "./pages/Dps";
 import Support from "./pages/Support";
+import Team from "./pages/Team";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Route path="/tank" element={<Tank />} />
       <Route path="/dps" element={<Dps />} />
       <Route path="/support" element={<Support />} />
+      <Route path="/team" element={<Team />} />
     </Routes>
   );
 }
