@@ -1,0 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Tank from "./pages/Tank";
+import Dps from "./pages/Dps";
+import Support from "./pages/Support";
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/tank" element={<Tank />} />
+      <Route path="/dps" element={<Dps />} />
+      <Route path="/support" element={<Support />} />
+    </Routes>
+  );
+}
