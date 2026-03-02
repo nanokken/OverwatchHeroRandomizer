@@ -66,11 +66,15 @@ export default function Tank() {
               key={slideKey}
               src={displayHero.image}
               alt={displayHero.name}
-              className="w-full h-full object-cover absolute"
+              className="w-full h-full object-cover absolute will-change-transform"
               initial={{ y: -280, opacity: 0.7 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 280, opacity: 0.7 }}
-              transition={{ duration: isSpinning ? 0.06 : 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ 
+                duration: isSpinning ? 0.06 : 0.4, 
+                ease: isSpinning ? "linear" : [0.34, 1.56, 0.64, 1],
+                opacity: { duration: isSpinning ? 0.06 : 0.2 }
+              }}
             />
           ) : (
             <motion.span

@@ -13,6 +13,7 @@ export default function Team() {
   const [team, setTeam] = useState([null, null, null, null, null]);
   const [isRolling, setIsRolling] = useState(false);
   const [currentSlot, setCurrentSlot] = useState(-1);
+  const [spinningSlot, setSpinningSlot] = useState(-1);
 
   const roleColors = {
     tank: "border-blue-500",
@@ -31,6 +32,7 @@ export default function Team() {
     setIsRolling(true);
     setTeam([null, null, null, null, null]);
     setCurrentSlot(-1);
+    setSpinningSlot(-1);
 
     const newTeam = [
       tanks[Math.floor(Math.random() * tanks.length)],
@@ -50,10 +52,16 @@ export default function Team() {
       audio.play();
     }, 1000);
 
-    // Reveal each character one per second
+    // Reveal each character one per second with spinning effect
     newTeam.forEach((hero, index) => {
+      // Start spinning 500ms before reveal
+      setTimeout(() => {
+        setSpinningSlot(index);
+      }, (index + 1) * 1000 - 500);
+
       setTimeout(() => {
         setCurrentSlot(index);
+        setSpinningSlot(-1);
         setTeam((prev) => {
           const updated = [...prev];
           updated[index] = hero;
@@ -85,7 +93,7 @@ export default function Team() {
           <div key={index} className="flex flex-col items-center">
             <span className="text-gray-400 text-sm mb-2">{slotLabels[index]}</span>
             <div
-              className={`w-32 h-32 rounded-xl bg-gray-700 flex items-center justify-center overflow-hidden shadow-xl border-4 ${roleColors[slotRoles[index]]} relative`}
+              className={`w-32 h-32 rounded-xl bg-gray-700 flex items-center justify-center overflow-hidden shadow-xl border-4 ${roleColors[slotRoles[index]]} relative ${spinningSlot === index ? "animate-pulse" : ""}`}
             >
               <AnimatePresence mode="wait">
                 {hero ? (
@@ -93,15 +101,19 @@ export default function Team() {
                     key={hero.name}
                     src={hero.image}
                     alt={hero.name}
-                    className="w-full h-full object-cover"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3, ease: "backOut" }}
+                    className="w-full h-full object-cover will-change-transform"
+                    initial={{ y: -150, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      ease: [0.34, 1.56, 0.64, 1],
+                      opacity: { duration: 0.2 }
+                    }}
                   />
                 ) : (
                   <motion.span
                     key="placeholder"
-                    className={`text-gray-400 text-4xl ${currentSlot === index - 1 || (currentSlot === -1 && index === 0 && isRolling) ? "animate-pulse" : ""}`}
+                    className={`text-gray-400 text-4xl ${spinningSlot === index ? "animate-bounce" : ""}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
