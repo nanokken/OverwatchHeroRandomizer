@@ -34,11 +34,15 @@ export default function Team() {
 
     const newTeam = [
       tanks[Math.floor(Math.random() * tanks.length)],
-      dpsHeroes[Math.floor(Math.random() * dpsHeroes.length)],
-      dpsHeroes[Math.floor(Math.random() * dpsHeroes.length)],
-      supports[Math.floor(Math.random() * supports.length)],
-      supports[Math.floor(Math.random() * supports.length)],
     ];
+
+    // Pick 2 unique DPS
+    const dpsShuffled = [...dpsHeroes].sort(() => Math.random() - 0.5);
+    newTeam.push(dpsShuffled[0], dpsShuffled[1]);
+
+    // Pick 2 unique supports
+    const supportsShuffled = [...supports].sort(() => Math.random() - 0.5);
+    newTeam.push(supportsShuffled[0], supportsShuffled[1]);
 
     // Play sound after 1 second
     setTimeout(() => {
