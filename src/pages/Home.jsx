@@ -9,7 +9,8 @@ export default function Home() {
       </h1>
 
       <p className="text-gray-400 text-center mb-12 max-w-md">
-        Pick a role to randomize a single hero, or use Team to roll a full comp with 1 tank, 2 DPS, and 2 supports!
+        Pick a role to randomize a single hero, or use Team to roll a full comp
+        with 1 tank, 2 DPS, and 2 supports!
       </p>
       <nav className="flex flex-col gap-6 items-center">
         <div className="flex flex-col sm:flex-row gap-6">
@@ -32,12 +33,20 @@ export default function Home() {
             SUPPORT
           </Link>
         </div>
-        <Link
-          to="/team"
-          className="w-40 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 text-center"
-        >
-          TEAM
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <Link
+            to="/team"
+            className="w-40 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 text-center"
+          >
+            TEAM
+          </Link>
+          <Link
+            to="/team6v6"
+            className="w-40 px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white text-xl font-semibold rounded-lg shadow-lg transition-all duration-200 hover:scale-105 text-center"
+          >
+            6v6
+          </Link>
+        </div>
       </nav>
       <Footer />
     </div>
